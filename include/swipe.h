@@ -24,7 +24,16 @@
  *  Kyle Gorman
 */
 
-#include "vector.h"
+#ifndef _SWIPE_H_
+#define _SWIPE_H_
 
-vector swipe(int, double, double, double, double);
-vector pyswipe(char[], double, double, double, double);
+#include <vector>
+
+typedef struct {
+    std::vector<double> strength;
+    std::vector<double> pitch;
+} PitchVector;
+
+PitchVector swipe(std::vector<double>& x, int32_t fs, int32_t step, double min, double max, double dlog2p, double derbs, double st);
+
+#endif
