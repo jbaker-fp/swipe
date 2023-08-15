@@ -40,4 +40,10 @@ Miscellany:
 
 This library has now been incorporated into the excellent [Speech Signal Processing Toolkit](http://sp-tk.sourceforge.net/)
 
-Somewhat of a hackjob when ported to C++, but includes optimzations to some loops using eigen/strict bounds.
+Somewhat of a hackjob when ported to C++, but includes optimzations to some loops using eigen/strict bounds. Uses fitpack to fit and evaluate the spline.
+
+Reference
+Paul Dierckx, Curve and Surface Fitting with Splines, Oxford University Press, 1993
+Developer
+Paul Dierckx, Department of Computer Science, K.U. Leuven, Celestijnenlaan 200 A, B-3001, Heverlee, Belgium
+Paul.Dierckx@cs.kuleuven.ac.be

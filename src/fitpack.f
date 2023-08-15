@@ -1,3 +1,9 @@
+c Reference
+c Paul Dierckx, Curve and Surface Fitting with Splines, Oxford University Press, 1993
+c Developer
+c Paul Dierckx, Department of Computer Science, K.U. Leuven, Celestijnenlaan 200 A, B-3001, Heverlee, Belgium
+c Paul.Dierckx@cs.kuleuven.ac.be      
+      
       recursive subroutine splev(t,n,c,nc,k,x,y,m,e,ier)
 c  subroutine splev evaluates in a number of points x(i),i=1,2,...,m
 c  a spline s(x) of degree k, given in its b-spline representation.
