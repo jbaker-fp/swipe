@@ -42,10 +42,14 @@ include_directories(
 #--------------------------------------
 # Swipe Library
 #--------------------------------------
-add_library(swipe SHARED src/swipe.cpp src/fitpack.f)
-target_include_directories(swipe PRIVATE ${EIGEN3_INCLUDE_DIR})
+add_library(swipe SHARED 
+    src/swipe.cpp 
+    src/fitpack.f
+    )
+target_include_directories(swipe PRIVATE 
+    ${EIGEN3_INCLUDE_DIR}
+    )
 target_link_libraries(swipe PRIVATE 
-    # fitpack
     FFTW::FFTW
     -lblas
     -llapack
