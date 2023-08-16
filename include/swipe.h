@@ -28,12 +28,24 @@
 #define _SWIPE_H_
 
 #include <vector>
+#include <string>
 
 typedef struct {
     std::vector<double> strength;
     std::vector<double> pitch;
 } PitchVector;
 
-PitchVector swipe(std::vector<double>& x, int32_t fs, int32_t step, double min, double max, double dlog2p, double derbs, double st);
+/**
+ * @param x Input Vector
+ * @param fs Input Frequency
+ * @param step window step
+ * @param min min pitch
+ * @param max max pitch
+ * @param dlog2p dlog2p
+ * @param derbs derbs
+ * @param st strength threshold, any pitch with a lower strength is set to zero in return
+ * @param wisdom Optional used to provide a preplanned wisdom.
+*/
+PitchVector swipe(std::vector<double>& x, int32_t fs, int32_t step, double min, double max, double dlog2p, double derbs, double st, const std::string& wisdom = std::string());
 
 #endif

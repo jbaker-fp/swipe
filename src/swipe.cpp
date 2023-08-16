@@ -101,99 +101,6 @@ double fixnan(double x) {
     return(isnan(x) ? 0. : x);
 }
 
-// MAC WISDOM
-#ifdef __APPLE__
-const char* wisdom = "(fftw-3.3.10 fftw_wisdom #x4be12fff #x7b2df9b2 #xa5975329 #x385b0041\n"
-"  (fftw_codelet_hc2cf_8 0 #x1040 #x1040 #x0 #x46284a7e #x5d7c8ac8 #x67a40edd #x701ec2f6)\n"
-"  (fftw_codelet_hc2cf_4 0 #x1040 #x1040 #x0 #xf400d043 #xadbcc975 #x4bac40cb #x7833f0aa)\n"
-"  (fftw_rdft_vrank_geq1_register 0 #x1040 #x1040 #x0 #x082776fc #x4b9b1d15 #xf8f6c54e #xed4e03fe)\n"
-"  (fftw_codelet_r2cf_8 2 #x1040 #x1040 #x0 #xfeb8a7d9 #x0bb74e7a #x59436ea4 #x21d5fb09)\n"
-"  (fftw_codelet_r2cf_8 2 #x1040 #x1040 #x0 #x5a87b94f #x630d3e77 #xa2e2443a #x3b0bc7d0)\n"
-"  (fftw_rdft_vrank_geq1_register 1 #x1040 #x1040 #x0 #xa3e07b96 #x4a81ecf1 #xc26d608c #x8c15863d)\n"
-"  (fftw_codelet_hc2cf2_4 0 #x1040 #x1040 #x0 #xaf51018d #x49bad7da #x8193787f #x1bb50304)\n"
-"  (fftw_codelet_r2cfII_16 0 #x1040 #x1040 #x0 #x5c9657a7 #xb583909a #x3ee7b98a #x923ef24f)\n"
-"  (fftw_codelet_r2cf_64 0 #x1040 #x1040 #x0 #x12a44a20 #x5dd60b71 #x21e0a37e #x23d64023)\n"
-"  (fftw_codelet_r2cf_64 2 #x1040 #x1040 #x0 #x5ce6486a #xed9080e3 #x3bb7119c #xa780bec1)\n"
-"  (fftw_rdft_vrank_geq1_register 1 #x1040 #x1040 #x0 #xd68c1b0d #xdec5fb3c #xea68bdea #xdd20ce78)\n"
-"  (fftw_rdft_vrank_geq1_register 1 #x1040 #x1040 #x0 #xdc2d71d8 #xa8de4c88 #x8e4960e8 #x53d2af90)\n"
-"  (fftw_codelet_hf_16 0 #x1040 #x1040 #x0 #x27839d50 #x0aae9d24 #x722b47c5 #x1b0ecefd)\n"
-"  (fftw_codelet_r2cf_16 0 #x1040 #x1040 #x0 #x70ef7d20 #x19ebf46c #xd621f90d #x79951d6a)\n"
-"  (fftw_codelet_r2cfII_8 2 #x1040 #x1040 #x0 #x1022d070 #x988061ba #xcd44ef4e #x6145c585)\n"
-"  (fftw_codelet_hc2cf_8 0 #x1040 #x1040 #x0 #x4e9725b5 #x248e8217 #x00b1fddf #x59463c98)\n"
-"  (fftw_codelet_r2cfII_8 2 #x1040 #x1040 #x0 #xc03df26b #xacaf3f9b #x5578608b #x5a1acfad)\n"
-"  (fftw_codelet_r2cfII_8 2 #x1040 #x1040 #x0 #xdcb3eadc #x7aae4296 #x086ff51f #x41e592f6)\n"
-"  (fftw_codelet_r2cf_64 0 #x1040 #x1040 #x0 #x1efbf9b7 #x4b507218 #x5daae168 #x61b8dd12)\n"
-"  (fftw_codelet_r2cf_64 0 #x1040 #x1040 #x0 #xc9220c71 #x2b3a4a2a #xb4c31cac #x09d63773)\n"
-"  (fftw_codelet_r2cf_4 2 #x1040 #x1040 #x0 #xb664f3c3 #xa36f4781 #x53e13a01 #x47de2854)\n"
-"  (fftw_codelet_hc2cf_8 0 #x1040 #x1040 #x0 #x650927ce #xad2953b7 #x0d47a3c2 #x4d06139d)\n"
-"  (fftw_codelet_r2cf_8 2 #x1040 #x1040 #x0 #xd57d4c22 #x4e1c4494 #x99472055 #x063b74e7)\n"
-"  (fftw_codelet_hf_16 0 #x1040 #x1040 #x0 #xbe5138c4 #xc409e5b3 #xf0c4aa0b #x547d24ba)\n"
-"  (fftw_codelet_hc2cf_4 0 #x1040 #x1040 #x0 #xcf2dc8f6 #xeaf35734 #x85e24035 #x769f96cf)\n"
-"  (fftw_codelet_r2cf_16 0 #x1040 #x1040 #x0 #xafb941dc #xe9671516 #x1f560985 #x21b6d110)\n"
-"  (fftw_codelet_r2cf_16 0 #x1040 #x1040 #x0 #x4de25858 #x88fbf594 #x99ddcdff #xcb89de26)\n"
-"  (fftw_rdft_vrank_geq1_register 0 #x1040 #x1040 #x0 #xaf98a4e0 #xfcddea34 #x980b2d82 #xa57cca64)\n"
-"  (fftw_codelet_r2cf_8 2 #x1040 #x1040 #x0 #xf34e66e1 #xe08b968c #xc34fa4dd #xe516a4e0)\n"
-"  (fftw_rdft_vrank_geq1_register 1 #x1040 #x1040 #x0 #x5409a8a1 #x46be8189 #xad3795a2 #x77d8c9b9)\n"
-"  (fftw_codelet_r2cfII_16 0 #x1040 #x1040 #x0 #xddb07789 #x5207474f #x82896f70 #xb790ff89)\n"
-"  (fftw_codelet_r2cfII_4 2 #x1040 #x1040 #x0 #x184802f9 #xbba93e31 #x22f14020 #x93936099)\n"
-"  (fftw_codelet_r2cf_16 0 #x1040 #x1040 #x0 #xee6fda48 #xf507a36d #x8f1189f7 #x16a0f19c)\n"
-"  (fftw_codelet_r2cfII_4 2 #x1040 #x1040 #x0 #x90b835a1 #x0a5899b6 #x161bfa35 #x34436abd)\n"
-"  (fftw_codelet_r2cf_32 2 #x1040 #x1040 #x0 #x1d2f3122 #x498102e6 #x68c7333f #x5ad939cc)\n"
-"  (fftw_codelet_r2cf_4 2 #x1040 #x1040 #x0 #xafe2dd13 #x71b28566 #xf8fe01b0 #x581b6dd3)\n"
-"  (fftw_rdft_vrank_geq1_register 0 #x1040 #x1040 #x0 #x8035d568 #x3014e232 #x12fd671f #x32ed03c0)\n"
-"  (fftw_codelet_r2cf_8 2 #x1040 #x1040 #x0 #x4220eee2 #x68deaeed #x5efa6627 #x6f600652)\n"
-"  (fftw_codelet_r2cf_4 2 #x1040 #x1040 #x0 #x20ce64c7 #xef0bd268 #x37826661 #xd29d0ed7)\n"
-"  (fftw_codelet_hf_16 0 #x1040 #x1040 #x0 #xbe5a1e7f #xa439dc17 #xa27226b1 #x80295e83)\n"
-"  (fftw_codelet_r2cf_4 2 #x1040 #x1040 #x0 #x29418a59 #xbb5e0c2f #xb3f1dadf #x2bfce015)\n"
-"  (fftw_rdft_vrank_geq1_register 0 #x1040 #x1040 #x0 #x4580130f #xc7c5663e #xd6f21992 #x87ff4375)\n"
-"  (fftw_rdft_vrank_geq1_register 1 #x1040 #x1040 #x0 #xde749c1e #x3e70a672 #xe8059160 #x2e308709)\n"
-"  (fftw_rdft_vrank_geq1_register 1 #x1040 #x1040 #x0 #xef27b9b7 #xf73d2d36 #x7dbc85fb #x37bcd2da)\n"
-"  (fftw_codelet_r2cf_16 2 #x1040 #x1040 #x0 #xc2956c83 #xf9e2390d #x332a3774 #x860920ff)\n"
-"  (fftw_codelet_r2cf_64 0 #x1040 #x1040 #x0 #x9b2aa334 #x4e70617a #xcc6654d2 #x3d5e8a48)\n"
-"  (fftw_codelet_r2cfII_8 2 #x1040 #x1040 #x0 #xdb9741c2 #xd78299ac #xa004c96e #xfeb498ab)\n"
-"  (fftw_codelet_r2cfII_4 2 #x1040 #x1040 #x0 #xea121310 #x7812288f #x1cf96287 #xc6e9a81b)\n"
-"  (fftw_codelet_hc2cf_8 0 #x1040 #x1040 #x0 #x587138ca #xa1bbe0b0 #x4572c05c #xe7acc963)\n"
-"  (fftw_codelet_hf_16 0 #x1040 #x1040 #x0 #x361f62ab #x997c0f61 #x54a64057 #x1f35aef5)\n"
-"  (fftw_codelet_r2cf_16 0 #x1040 #x1040 #x0 #x4db470f5 #x6d9348ae #x682f66b3 #xe516c1d4)\n"
-"  (fftw_rdft_vrank_geq1_register 1 #x1040 #x1040 #x0 #x25724df0 #xba9bb091 #xb4ca44ff #xa583d488)\n"
-")\n"
-"";
-#endif
-
-// UNIX WISDOM
-#ifdef __linux__
-const char* wisdom = "(fftw-3.3.8 fftw_wisdom #x458a31c8 #x92381c4c #x4f974889 #xcd46f97e\n"
-"  (fftw_codelet_n1fv_128_avx 0 #x31bff #x31bff #x0 #x37647671 #xa231fde8 #xcd1493d8 #x9f0a3dac)\n"
-"  (fftw_codelet_hc2cfdftv_16_avx 0 #x31bff #x31bff #x0 #x7366d115 #xbc457627 #x02c92fe0 #xa85a47d3)\n"
-"  (fftw_codelet_hc2cfdftv_32_avx 0 #x31bff #x31bff #x0 #xdc38cc14 #x0d1c6e3c #xc0ae48bf #xa0e0eb5a)\n"
-"  (fftw_codelet_r2cfII_16 2 #x31bff #x31bff #x0 #x9fa443f9 #x0132a381 #xa9894cfa #x490e1490)\n"
-"  (fftw_codelet_hc2cfdftv_2_avx 0 #x31bff #x31bff #x0 #x7da7817a #xbe20e7cd #x001a0a1b #x7f9f0731)\n"
-"  (fftw_codelet_n1fv_16_avx 0 #x31bff #x31bff #x0 #x083037ce #x1237799f #x394f37a1 #x6cf21ac5)\n"
-"  (fftw_codelet_r2cf_16 2 #x31bff #x31bff #x0 #x57f9650f #x9a38745d #x7c332073 #x7e66aa89)\n"
-"  (fftw_codelet_n2fv_64_avx 0 #x31bff #x31bff #x0 #x4fa8b2f3 #xd93af2ba #xec419f5a #xae14e9fd)\n"
-"  (fftw_codelet_n1fv_16_avx 0 #x31bff #x31bff #x0 #xfaab6250 #x004c256b #x78db2567 #xb6804f43)\n"
-"  (fftw_codelet_n1fv_16_avx 0 #x31bff #x31bff #x0 #xb6ffb6dd #x8b384252 #xae9f2d40 #x43cb879f)\n"
-"  (fftw_codelet_hc2cfdftv_2_avx 0 #x31bff #x31bff #x0 #x429d1761 #xc79f9ecc #xdb982251 #x10f2a2eb)\n"
-"  (fftw_codelet_n2fv_32_avx 0 #x31bff #x31bff #x0 #x21bf8747 #x375e1866 #x1b9ee1b5 #xa0a9b5c3)\n"
-"  (fftw_codelet_t3fv_16_avx 0 #x31bff #x31bff #x0 #x791ccda1 #xb979152f #x871ea4a6 #x2e274828)\n"
-"  (fftw_codelet_r2cfII_2 2 #x31bff #x31bff #x0 #xfcde69de #xb320f2f0 #xf9c513b9 #x0388aa6b)\n"
-"  (fftw_codelet_r2cfII_2 2 #x31bff #x31bff #x0 #x326e1847 #x46d0d5f5 #xb2f15e22 #xf96e89af)\n"
-"  (fftw_codelet_n1fv_32_avx 0 #x31bff #x31bff #x0 #x11e5ffc0 #xcdd528bc #x8da1fac2 #x4a17575d)\n"
-"  (fftw_dft_vrank_geq1_register 0 #x31bff #x31bff #x0 #x730e35f0 #x80430f15 #xe928d6bf #xcc157970)\n"
-"  (fftw_codelet_r2cfII_32 2 #x31bff #x31bff #x0 #x0d723485 #x067d5676 #x69a91896 #x7274711f)\n"
-"  (fftw_codelet_r2cfII_2 2 #x31bff #x31bff #x0 #x6e5132eb #x80cf1f87 #x62d8f14f #x169bb56f)\n"
-"  (fftw_codelet_r2cf_2 2 #x31bff #x31bff #x0 #x5e097b05 #x6e0d6250 #xbd8a700a #xb202d582)\n"
-"  (fftw_codelet_r2cf_2 2 #x31bff #x31bff #x0 #x6f5d40e3 #x02501563 #x153b8f39 #xffdc1a66)\n"
-"  (fftw_codelet_hc2cfdftv_32_avx 0 #x31bff #x31bff #x0 #x2b2224fd #xc6d31fc1 #xf08ddb32 #xd3726977)\n"
-"  (fftw_codelet_hc2cfdftv_32_avx 0 #x31bff #x31bff #x0 #x4fc99822 #xf85b48fc #x7d0a0313 #x81834ad0)\n"
-"  (fftw_codelet_hc2cfdftv_2_avx 0 #x31bff #x31bff #x0 #xb9ca5008 #xdaec3213 #x06c7b7c1 #x9db6000f)\n"
-"  (fftw_codelet_r2cfII_32 2 #x31bff #x31bff #x0 #x11bed0d2 #x53e7db34 #xa88d8340 #x0a29b429)\n"
-"  (fftw_codelet_r2cf_2 2 #x31bff #x31bff #x0 #x96022fcd #x29ef0675 #x1b46036f #x81e6cbd5)\n"
-"  (fftw_codelet_r2cfII_32 2 #x31bff #x31bff #x0 #x9854524d #x45e23508 #xe087f9f8 #xdf099e07)\n"
-")";
-#endif
-
-
 // TODO: Hardcoded primes may need more depending on use case
 const int primes[169] = {1,2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97,101,
 103,107,109,113,127,131,137,139,149,151,157,163,167,173,179,181,191,193,197,
@@ -630,17 +537,18 @@ PitchVector pitch(Matrix& S, std::vector<double>& pc, double st) {
 }
 
 // primary utility function for each pitch extraction
-PitchVector swipe(std::vector<double>& x, int32_t fs, int32_t step, double min, double max, double dlog2p, double derbs, double st) {
+PitchVector swipe(std::vector<double>& x, int32_t fs, int32_t step, double min, double max, double dlog2p, double derbs, double st, const std::string& wisdom) {
     int i; 
     double td = 0.;
     double dt = (double)step/fs;
 
-    if (fftw_import_wisdom_from_string(wisdom) == 0) {
-        printf("Failed to load wisdom!\n");
-        printf("Will create wisdom using FFTW_ESTIMATE flag\n");
-        // exit(EXIT_FAILURE);
+    if (wisdom != "") {
+        if (fftw_import_wisdom_from_string(wisdom.data()) == 0) {
+            printf("Failed to load wisdom!\n");
+            printf("Will create wisdom using FFTW_ESTIMATE flag\n");
+        }
     }
-
+    
     double nyquist = fs / 2.;
     double nyquist2 = fs;
     double nyquist16 = fs * 8.;
