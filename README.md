@@ -14,7 +14,7 @@ Please cite this dissertation, and if possible include a URL to the source.
 How to install:
 ---------------
 
-For all platforms: `mkdir build && cd build` To compile as a library, type `cmake ..` at the terminal. To compile the with a program binary type `cmake -DBUILD_BINARY=TRUE ..`
+For all platforms: `mkdir build && cd build` To compile as a library, type `cmake ..` at the terminal. To compile the with a program binary, type `cmake -DBUILD_BINARY=TRUE ..`
 
 Linux: All the large libraries should be available as packages if you're using a "modern" distro. For instance, on a Ubuntu system (Ubuntu 9.04, "Jaunty Jackalope", kernel 2.6.28-13-generic), I ran:
 
