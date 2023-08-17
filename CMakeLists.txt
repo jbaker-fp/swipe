@@ -42,7 +42,7 @@ include_directories(
 #--------------------------------------
 # Swipe Library
 #--------------------------------------
-add_library(swipe SHARED 
+add_library(swipe STATIC 
     src/swipe.cpp 
     src/fitpack.f
     )
