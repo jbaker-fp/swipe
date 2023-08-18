@@ -32,7 +32,6 @@ set(PFFFT_USE_BENCH_MKL OFF)
 set(PFFFT_USE_FFTPACK OFF)
 
 # Disable uninstall target for this submodule
-set(BUILD_UNINSTALL OFF CACHE BOOL "Build uninstall target" FORCE)
 add_subdirectory(pffft)
 
 
@@ -55,9 +54,9 @@ add_library(swipe SHARED
     )
 target_include_directories(swipe PUBLIC include)
 target_link_libraries(swipe PRIVATE 
-    pffft
     -lblas
     -llapack
+    PFFFT
     )
 target_compile_options(swipe PRIVATE -O3 -fPIC)
 
