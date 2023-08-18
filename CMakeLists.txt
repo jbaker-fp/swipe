@@ -18,6 +18,18 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CUSTOM_COMPILER_FLAGS}")
 find_package(Eigen3 REQUIRED)
 MESSAGE(STATUS "EIGEN3_INCLUDE_DIR: ${EIGEN3_INCLUDE_DIR}")
 
+# Sets options for pffft
+set(PFFFT_USE_TYPE_FLOAT OFF)
+set(PFFFT_USE_TYPE_DOUBLE ON)
+
+set(INSTALL_PFFFT OFF)
+
+set(PFFFT_USE_BENCH_FFTW OFF)
+set(PFFFT_USE_BENCH_GREEN OFF)
+set(PFFFT_USE_BENCH_KISS OFF)
+set(PFFFT_USE_BENCH_POCKET OFF)
+set(PFFFT_USE_BENCH_MKL OFF)
+set(PFFFT_USE_FFTPACK OFF)
 add_subdirectory(pffft)
 
 
@@ -37,12 +49,10 @@ include_directories(
 add_library(swipe SHARED 
     src/swipe.cpp 
     src/fitpack.f
-    pffft/pffft_double.c
     )
 target_include_directories(swipe PUBLIC include)
 target_link_libraries(swipe PRIVATE 
-    # FFTW::FFTW
-    PFFFT
+    pffft
     -lblas
     -llapack
     )
