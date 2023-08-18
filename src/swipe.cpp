@@ -38,7 +38,9 @@
 #include <ctime>
 #include <vector>
 
-#include <fftw3.h>   // http://www.fftw.org/
+// #include <fftw3.h>   // http://www.fftw.org/
+
+#include "pffft_double.h"
 
 #include "swipe.h"
 
@@ -240,14 +242,14 @@ int bisectv(const std::vector<double>& yr_vector, double key) {
 }
 
 // a helper function for loudness() for individual fft slices
-void La(Matrix& L, std::vector<double>& f, std::vector<double>& fERBs, fftw_plan plan, 
-                            fftw_complex* fo, int w2, int hi, int i) {
+void La(Matrix& L, std::vector<double>& f, std::vector<double>& fERBs, PFFFTD_Setup* plan, 
+                            double* fo, double* fi, int w2, int hi, int i) {
     int j;
-    fftw_execute(plan);
+    pffftd_transform_ordered(plan, fi, fo, NULL, PFFFT_FORWARD);
     std::vector<double> a(w2+1);
 
-    for (j = 0; j < w2+1; j++) // this iterates over only the first half
-        a[j] = sqrt(fo[j][0] * fo[j][0] + fo[j][1] * fo[j][1]); // spectrum in python
+    for (j = 0; j < w2+1; j+=2) // this iterates over only the first half
+        a[j] = sqrt(fo[j] * fo[j] + fo[j+1] * fo[j+1]); // spectrum in python
 
     // std::vector<double> a2 = spline(f, a); // a2 is now the result of the cubic spline
     std::vector<double> y = fbspline(f, a, 3, fERBs);
@@ -259,15 +261,16 @@ void La(Matrix& L, std::vector<double>& f, std::vector<double>& fERBs, fftw_plan
 
 // a function for populating the loudness matrix with a signal x
 Matrix loudness(std::vector<double>& x, std::vector<double>& fERBs, double nyquist, int w, int w2) {
-    fftw_plan plan;
+    PFFFTD_Setup* plan = pffftd_new_setup(w, PFFFT_COMPLEX);
     int i, j, hi; 
     int offset = 0;
     double td = nyquist / w2; // this is equivalent to fstep
-    // testing showed this configuration of fftw to be fastest
-    double* fi = (double*) fftw_malloc(sizeof(double) * w); 
-    fftw_complex* fo = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * w);
 
-    plan = fftw_plan_dft_r2c_1d(w, fi, fo, FFTW_ESTIMATE);
+    // testing showed this configuration of fftw to be fastest
+    double* fi = (double*) pffftd_aligned_malloc(sizeof(double) * w); 
+    double* fo = (double*) pffftd_aligned_malloc(sizeof(double) * (w * 2));
+
+    // plan = fftw_plan_dft_r2c_1d(w, fi, fo, FFTW_ESTIMATE);
  
     std::vector<double> hann(w); // this defines the Hann[ing] window
     for (i = 0; i < w; i++) 
@@ -286,12 +289,12 @@ Matrix loudness(std::vector<double>& x, std::vector<double>& fERBs, double nyqui
         fi[j] = 0.; // more explicitly, 0. * hanna[j]
     for (; j < w; j++) 
         fi[j] = x[j-w2] * hann[j];
-    La(L, f, fERBs, plan, fo, w2, hi, 0); 
+    La(L, f, fERBs, plan, fo, fi, w2, hi, 0); 
 
     for (i = 1; i < L.rows() - 2; i++) {
         for (j=0; j < w; j++) 
             fi[j] = x[j + offset] * hann[j];
-        La(L, f, fERBs, plan, fo, w2, hi, i); 
+        La(L, f, fERBs, plan, fo, fi, w2, hi, i); 
         offset += w2;
     }
 
@@ -301,7 +304,7 @@ Matrix loudness(std::vector<double>& x, std::vector<double>& fERBs, double nyqui
         for (/* j = x.size() - offset */; j < w; j++) 
             fi[j] = 0.; // once again, 0. * hanna[j] 
 
-        La(L, f, fERBs, plan, fo, w2, hi, i);
+        La(L, f, fERBs, plan, fo, fi, w2, hi, i);
         offset += w2;
     } // now L is fully valued
 
@@ -317,9 +320,9 @@ Matrix loudness(std::vector<double>& x, std::vector<double>& fERBs, double nyqui
         } // otherwise, it is already 0.
     } 
 
-    fftw_destroy_plan(plan); 
-    fftw_free(fi); 
-    fftw_free(fo); 
+    pffftd_destroy_setup(plan); 
+    free(fi); 
+    free(fo); 
     return(L);
 }
 

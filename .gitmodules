@@ -1,0 +1,3 @@
+[submodule "pffft"]
+	path = pffft
+	url = git@github.com:marton78/pffft.git

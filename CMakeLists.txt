@@ -24,9 +24,11 @@ set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules)
 find_package(Eigen3 REQUIRED)
 MESSAGE(STATUS "EIGEN3_INCLUDE_DIR: ${EIGEN3_INCLUDE_DIR}")
 
-# find FFTW
-find_package(FFTW REQUIRED)
-MESSAGE(STATUS "FFTW_LIBRARIES: ${FFTW_LIBRARIES}")
+# # find FFTW
+# find_package(FFTW REQUIRED)
+# MESSAGE(STATUS "FFTW_LIBRARIES: ${FFTW_LIBRARIES}")
+
+add_subdirectory(pffft)
 
 
 #--------------------------------------
@@ -45,6 +47,7 @@ include_directories(
 add_library(swipe SHARED 
     src/swipe.cpp 
     src/fitpack.f
+    pffft/pffft_double.c
     )
 target_include_directories(swipe PUBLIC include)
 target_link_libraries(swipe PRIVATE 
