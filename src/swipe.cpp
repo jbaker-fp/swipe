@@ -38,8 +38,6 @@
 #include <ctime>
 #include <vector>
 
-// #include <fftw3.h>   // http://www.fftw.org/
-
 #include "pffft_double.h"
 
 #include "swipe.h"
@@ -248,8 +246,8 @@ void La(Matrix& L, std::vector<double>& f, std::vector<double>& fERBs, PFFFTD_Se
     pffftd_transform_ordered(plan, fi, fo, NULL, PFFFT_FORWARD);
     std::vector<double> a(w2+1);
 
-    for (j = 0; j < w2+1; j+=2) // this iterates over only the first half
-        a[j] = sqrt(fo[j] * fo[j] + fo[j+1] * fo[j+1]); // spectrum in python
+    for (j = 0; j < w2+1; j+=1) // this iterates over only the first half
+        a[j] = sqrt(fo[2*j] * fo[2*j] + fo[2*j+1] * fo[2*j+1]); // spectrum in python
 
     // std::vector<double> a2 = spline(f, a); // a2 is now the result of the cubic spline
     std::vector<double> y = fbspline(f, a, 3, fERBs);
@@ -261,14 +259,14 @@ void La(Matrix& L, std::vector<double>& f, std::vector<double>& fERBs, PFFFTD_Se
 
 // a function for populating the loudness matrix with a signal x
 Matrix loudness(std::vector<double>& x, std::vector<double>& fERBs, double nyquist, int w, int w2) {
-    PFFFTD_Setup* plan = pffftd_new_setup(w, PFFFT_COMPLEX);
+    PFFFTD_Setup* plan = pffftd_new_setup(w, PFFFT_REAL);
     int i, j, hi; 
     int offset = 0;
     double td = nyquist / w2; // this is equivalent to fstep
 
     // testing showed this configuration of fftw to be fastest
     double* fi = (double*) pffftd_aligned_malloc(sizeof(double) * w); 
-    double* fo = (double*) pffftd_aligned_malloc(sizeof(double) * (w * 2));
+    double* fo = (double*) pffftd_aligned_malloc(sizeof(double) * (w + 2));
 
     // plan = fftw_plan_dft_r2c_1d(w, fi, fo, FFTW_ESTIMATE);
  
@@ -321,8 +319,8 @@ Matrix loudness(std::vector<double>& x, std::vector<double>& fERBs, double nyqui
     } 
 
     pffftd_destroy_setup(plan); 
-    free(fi); 
-    free(fo); 
+    pffftd_aligned_free(fi); 
+    pffftd_aligned_free(fo); 
     return(L);
 }
 

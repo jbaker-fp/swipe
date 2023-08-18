@@ -14,19 +14,9 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 #--------------------------------------
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CUSTOM_COMPILER_FLAGS}")
 
-#--------------------------------------
-# Modules
-#--------------------------------------
-# where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
-set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules)
-
 # find Eigen
 find_package(Eigen3 REQUIRED)
 MESSAGE(STATUS "EIGEN3_INCLUDE_DIR: ${EIGEN3_INCLUDE_DIR}")
-
-# # find FFTW
-# find_package(FFTW REQUIRED)
-# MESSAGE(STATUS "FFTW_LIBRARIES: ${FFTW_LIBRARIES}")
 
 add_subdirectory(pffft)
 
@@ -51,7 +41,8 @@ add_library(swipe SHARED
     )
 target_include_directories(swipe PUBLIC include)
 target_link_libraries(swipe PRIVATE 
-    FFTW::FFTW
+    # FFTW::FFTW
+    PFFFT
     -lblas
     -llapack
     )
