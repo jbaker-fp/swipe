@@ -30,6 +30,9 @@ set(PFFFT_USE_BENCH_KISS OFF)
 set(PFFFT_USE_BENCH_POCKET OFF)
 set(PFFFT_USE_BENCH_MKL OFF)
 set(PFFFT_USE_FFTPACK OFF)
+
+# Disable uninstall target for this submodule
+set(BUILD_UNINSTALL OFF CACHE BOOL "Build uninstall target" FORCE)
 add_subdirectory(pffft)
 
 
