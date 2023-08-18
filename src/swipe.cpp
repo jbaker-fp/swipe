@@ -545,12 +545,12 @@ PitchVector swipe(std::vector<double>& x, int32_t fs, int32_t step, double min, 
     double td = 0.;
     double dt = (double)step/fs;
 
-    if (wisdom != "") {
-        if (fftw_import_wisdom_from_string(wisdom.data()) == 0) {
-            printf("Failed to load wisdom!\n");
-            printf("Will create wisdom using FFTW_ESTIMATE flag\n");
-        }
-    }
+    // if (wisdom != "") {
+    //     if (fftw_import_wisdom_from_string(wisdom.data()) == 0) {
+    //         printf("Failed to load wisdom!\n");
+    //         printf("Will create wisdom using FFTW_ESTIMATE flag\n");
+    //     }
+    // }
     
     double nyquist = fs / 2.;
     double nyquist2 = fs;
@@ -602,6 +602,5 @@ PitchVector swipe(std::vector<double>& x, int32_t fs, int32_t step, double min, 
 
     PitchVector p = pitch(S, pc, st); // find pitch using strength matrix
 
-    fftw_cleanup();
     return(p);
 }
