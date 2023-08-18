@@ -1,3 +1,6 @@
 [submodule "pffft"]
 	path = pffft
 	url = git@github.com:marton78/pffft.git
+[submodule "eigen"]
+	path = eigen
+	url = https://gitlab.com/libeigen/eigen.git
