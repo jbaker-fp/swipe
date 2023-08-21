@@ -538,17 +538,10 @@ PitchVector pitch(Matrix& S, std::vector<double>& pc, double st) {
 }
 
 // primary utility function for each pitch extraction
-PitchVector swipe(std::vector<double>& x, int32_t fs, int32_t step, double min, double max, double dlog2p, double derbs, double st, const std::string& wisdom) {
+PitchVector swipe(std::vector<double>& x, int32_t fs, int32_t step, double min, double max, double dlog2p, double derbs, double st) {
     int i; 
     double td = 0.;
     double dt = (double)step/fs;
-
-    // if (wisdom != "") {
-    //     if (fftw_import_wisdom_from_string(wisdom.data()) == 0) {
-    //         printf("Failed to load wisdom!\n");
-    //         printf("Will create wisdom using FFTW_ESTIMATE flag\n");
-    //     }
-    // }
     
     double nyquist = fs / 2.;
     double nyquist2 = fs;

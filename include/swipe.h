@@ -46,6 +46,6 @@ typedef struct {
  * @param st strength threshold, any pitch with a lower strength is set to zero in return
  * @param wisdom Optional used to provide a preplanned wisdom.
 */
-PitchVector swipe(std::vector<double>& x, int32_t fs, int32_t step, double min, double max, double dlog2p, double derbs, double st, const std::string& wisdom = std::string());
+PitchVector swipe(std::vector<double>& x, int32_t fs, int32_t step, double min, double max, double dlog2p, double derbs, double st);
 
 #endif
