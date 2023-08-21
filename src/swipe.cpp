@@ -25,7 +25,7 @@
 
 #define VNUM    1.5 // current version
 
-#include <Eigen/Dense>
+#include <eigen3/Eigen/Dense>
 
 #include <cmath>
 #include <cstdio>

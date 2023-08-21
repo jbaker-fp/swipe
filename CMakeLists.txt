@@ -14,9 +14,9 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 #--------------------------------------
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CUSTOM_COMPILER_FLAGS}")
 
-# find Eigen
-find_package(Eigen3 REQUIRED)
-MESSAGE(STATUS "EIGEN3_INCLUDE_DIR: ${EIGEN3_INCLUDE_DIR}")
+# # find Eigen
+# find_package(Eigen3 REQUIRED)
+# MESSAGE(STATUS "EIGEN3_INCLUDE_DIR: ${EIGEN3_INCLUDE_DIR}")
 
 # Sets options for pffft
 set(PFFFT_USE_TYPE_FLOAT OFF)
@@ -41,7 +41,7 @@ add_subdirectory(pffft)
 include_directories(
     src
     include
-    ${EIGEN3_INCLUDE_DIR}
+    ${EIGEN_INCLUDE_DIRS}
 )
 
 
