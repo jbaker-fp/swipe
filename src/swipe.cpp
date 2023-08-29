@@ -268,8 +268,8 @@ Matrix loudness(std::vector<double>& x, std::vector<double>& fERBs, double nyqui
     double* fi = (double*) pffftd_aligned_malloc(sizeof(double) * w); 
     memset(fi, 0, w);
 
-    double* fo = (double*) pffftd_aligned_malloc(sizeof(double) * (w + 1));
-    memset(fo, 0, w+1);
+    double* fo = (double*) pffftd_aligned_malloc(sizeof(double) * (w + 2));
+    memset(fo, 0, w+2);
 
     // plan = fftw_plan_dft_r2c_1d(w, fi, fo, FFTW_ESTIMATE);
  
