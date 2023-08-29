@@ -266,10 +266,14 @@ Matrix loudness(std::vector<double>& x, std::vector<double>& fERBs, double nyqui
 
     // testing showed this configuration of fftw to be fastest
     double* fi = (double*) pffftd_aligned_malloc(sizeof(double) * w); 
-    memset(fi, 0, w);
+    for (int i = 0; i < w; i++) {
+    	fi[i] = 0;
+    }
 
     double* fo = (double*) pffftd_aligned_malloc(sizeof(double) * (w + 2));
-    memset(fo, 0, w+2);
+    for (int i = 0; i < w+2; i++) {
+    	fo[i] = 0;
+    }
 
     // plan = fftw_plan_dft_r2c_1d(w, fi, fo, FFTW_ESTIMATE);
  
