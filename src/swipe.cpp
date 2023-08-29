@@ -246,7 +246,7 @@ void La(Matrix& L, std::vector<double>& f, std::vector<double>& fERBs, PFFFTD_Se
     pffftd_transform_ordered(plan, fi, fo, NULL, PFFFT_FORWARD);
     std::vector<double> a(w2+1);
 
-    for (j = 0; j < w2+1; j+=1) // this iterates over only the first half
+    for (j = 0; j < w2+1; j++) // this iterates over only the first half
         a[j] = sqrt(fo[2*j] * fo[2*j] + fo[2*j+1] * fo[2*j+1]); // spectrum in python
 
     // std::vector<double> a2 = spline(f, a); // a2 is now the result of the cubic spline
@@ -266,7 +266,10 @@ Matrix loudness(std::vector<double>& x, std::vector<double>& fERBs, double nyqui
 
     // testing showed this configuration of fftw to be fastest
     double* fi = (double*) pffftd_aligned_malloc(sizeof(double) * w); 
-    double* fo = (double*) pffftd_aligned_malloc(sizeof(double) * (w + 2));
+    memset(fi, 0, w);
+
+    double* fo = (double*) pffftd_aligned_malloc(sizeof(double) * (w + 1));
+    memset(fo, 0, w+1);
 
     // plan = fftw_plan_dft_r2c_1d(w, fi, fo, FFTW_ESTIMATE);
  
