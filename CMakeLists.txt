@@ -38,24 +38,8 @@ include_directories(
     include
 )
 
-message(STATUS "swipe::NO_BUILD_DEPENDENCIES = ${NO_BUILD_DEPENDENCIES}")
-if ((NOT DEFINED NO_BUILD_DEPENDENCIES) OR (NOT ${NO_BUILD_DEPENDENCIES}))
-    # eigen
-    ExternalProject_Add(
-        eigen
-        PREFIX ${CMAKE_BINARY_DIR}/_deps
-        SOURCE_DIR ${CMAKE_SOURCE_DIR}/eigen
-        CMAKE_ARGS -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/_install
-        BUILD_COMMAND ${CMAKE_COMMAND} --build . --target install
-    )
-    set(EIGEN_INCLUDE_DIR "${CMAKE_BINARY_DIR}/_install/include")
-    find_package(Eigen3 REQUIRED)
-
-    # openblas
-    set(NO_LAPACKE TRUE)
-    set(BUILD_STATIC_LIBS TRUE)
-    set(BUILD_SHARED_LIBS FALSE)
-    add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/OpenBLAS")
+if ((NOT DEFINED EIGEN3_INCLUDE_DIR) OR (NOT ${EIGEN3_INCLUDE_DIR}))
+    set(EIGEN3_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/eigen")
 endif()
 
 #--------------------------------------
@@ -65,9 +49,10 @@ add_library(swipe STATIC
     src/swipe.cpp
     src/fitpack.f
     )
-target_include_directories(swipe PRIVATE pfft ${EIGEN_INCLUDE_DIR})
+target_include_directories(swipe PRIVATE pfft ${EIGEN3_INCLUDE_DIR})
 target_link_libraries(swipe PRIVATE
-    openblas
+    -lblas
+    -llapack
     PFFFT
     )
 target_compile_options(swipe PRIVATE -O3 -fPIC)

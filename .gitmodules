@@ -1,9 +1,6 @@
 [submodule "pffft"]
 	path = pffft
 	url = git@github.com:marton78/pffft.git
-[submodule "OpenBLAS"]
-	path = OpenBLAS
-	url = git@github.com:xianyi/OpenBLAS.git
-[submodule "eigen"]
-	path = eigen
+[submodule "eigen/eigen3"]
+	path = eigen/eigen3
 	url = https://gitlab.com/libeigen/eigen.git
