@@ -38,7 +38,7 @@ include_directories(
     include
 )
 
-if ((NOT DEFINED EIGEN3_INCLUDE_DIR) OR (NOT ${EIGEN3_INCLUDE_DIR}))
+if (NOT EIGEN3_INCLUDE_DIR)
     set(EIGEN3_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/eigen")
 endif()
 
