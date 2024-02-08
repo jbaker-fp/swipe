@@ -42,6 +42,14 @@ if (NOT EIGEN3_INCLUDE_DIR)
     set(EIGEN3_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/eigen")
 endif()
 
+if (IS_CLOUD_DEPLOYMENT AND NOT IS_LOCAL_BUILD)
+    if (DEFINED ENV{GFORTRAN_STATIC_LIB})
+        message(STATUS "libgfortran: $ENV{GFORTRAN_STATIC_LIB}")
+    else()
+        message(FATAL_ERROR "libgfortran not found")
+    endif()
+endif()
+
 #--------------------------------------
 # Swipe Library
 #--------------------------------------
@@ -54,7 +62,10 @@ target_link_libraries(swipe PRIVATE
     -lblas
     -llapack
     PFFFT
+    $ENV{GFORTRAN_STATIC_LIB}
     )
+
+target_link_options(swipe PRIVATE "-static-libgfortran" "-static-libgcc")
 target_compile_options(swipe PRIVATE -O3 -fPIC)
 
 if(BUILD_BINARY)
