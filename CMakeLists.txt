@@ -27,8 +27,12 @@ set(PFFFT_USE_BENCH_POCKET OFF)
 set(PFFFT_USE_BENCH_MKL OFF)
 set(PFFFT_USE_FFTPACK OFF)
 
-# Disable uninstall target for this submodule
+# pffft dependency
 add_subdirectory(pffft)
+
+# openblas dependency
+set(BUILD_STATIC_LIBS ON)
+add_subdirectory(openblas)
 
 #--------------------------------------
 # Includes
@@ -42,13 +46,17 @@ if (NOT EIGEN3_INCLUDE_DIR)
     set(EIGEN3_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/eigen")
 endif()
 
-if (IS_CLOUD_DEPLOYMENT AND NOT IS_LOCAL_BUILD)
+#if (IS_CLOUD_DEPLOYMENT)# AND NOT IS_LOCAL_BUILD)
+
     if (DEFINED ENV{GFORTRAN_STATIC_LIB})
-        message(STATUS "libgfortran: $ENV{GFORTRAN_STATIC_LIB}")
+        set(GFORTRAN_LIBRARIES $ENV{GFORTRAN_STATIC_LIB})
+        message(STATUS "FORTRAN: ${GFORTRAN_LIBRARIES}")
     else()
         message(FATAL_ERROR "libgfortran not found")
     endif()
-endif()
+
+#endif()
+
 
 #--------------------------------------
 # Swipe Library
@@ -59,10 +67,9 @@ add_library(swipe STATIC
     )
 target_include_directories(swipe PRIVATE pfft ${EIGEN3_INCLUDE_DIR})
 target_link_libraries(swipe PRIVATE
-    -lblas
-    -llapack
+    openblas
+    ${GFORTRAN_LIBRARIES}
     PFFFT
-    $ENV{GFORTRAN_STATIC_LIB}
     )
 
 target_link_options(swipe PRIVATE "-static-libgfortran" "-static-libgcc")

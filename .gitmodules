@@ -4,3 +4,6 @@
 [submodule "eigen/eigen3"]
 	path = eigen/eigen3
 	url = https://gitlab.com/libeigen/eigen.git
+[submodule "openblas"]
+	path = openblas
+	url = git@github.com:OpenMathLib/OpenBLAS.git
